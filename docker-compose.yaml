@@ -107,6 +107,7 @@ services:
     environment:
       - DOZZLE_REMOTE_AGENT=${DOZZLE_REMOTE_AGENT:-}
       - DOZZLE_LEVEL=info
+      - DOZZLE_NO_ANALYTICS=true
     networks:
       - shared_net
       - homelab_swarm_net

@@ -1,0 +1,62 @@
+services:
+
+  # ========================================================
+  # STORAGE HELPER (Automated Directory & Permissions Guard)
+  # ========================================================
+  storage-init:
+    image: alpine:latest
+    container_name: worker_storage_init
+    user: "0:0"
+    restart: unless-stopped
+    network_mode: none
+    volumes:
+      - ${DATA_DIR:-/home/ubuntu/DATA}/observability/data:/data
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo ">>> [Storage Init] Setting up worker directories and permissions..."
+        mkdir -p /data
+        chmod -R 775 /data
+        echo ">>> [Storage Init] Permissions applied. Storage guard active."
+        sleep infinity
+
+  # ========================================================
+  # BESZEL AGENT (Host Telemetry & Hardware Metrics Daemon)
+  # ========================================================
+  beszel-agent:
+    image: henrygd/beszel-agent:latest
+    container_name: beszel_agent
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /:/extra-filesystems/root:ro
+    environment:
+      - PORT=${BESZEL_AGENT_PORT:-45876}
+      - KEY=${BESZEL_PUBLIC_KEY}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ========================================================
+  # DOZZLE AGENT (Remote Multi-Node Container Log Streamer)
+  # ========================================================
+  dozzle-agent:
+    image: amir20/dozzle:latest
+    container_name: dozzle_agent
+    restart: unless-stopped
+    command: agent
+    ports:
+      - "${TS_NODE_IP:-0.0.0.0}:7007:7007"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - DOZZLE_LEVEL=info
+      - DOZZLE_NO_ANALYTICS=true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
