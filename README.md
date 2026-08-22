@@ -44,7 +44,7 @@ Persistent state is stored cleanly outside the Git repository in the standard ho
    TZ=UTC
    HOMEPAGE_ALLOWED_HOSTS=homelab.bluewave.work,hub.bluewave.work,127.0.0.1,localhost
    BESZEL_PUBLIC_KEY=your_key_from_beszel_hub
-   DOZZLE_REMOTE_AGENT=100.83.191.68:7007,100.71.154.78:7007
+   DOZZLE_REMOTE_AGENT=100.x.y.1:7007,100.x.y.2:7007
    ```
 5. Click **Deploy**.
 
