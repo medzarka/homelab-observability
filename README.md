@@ -46,7 +46,7 @@ homelab-observability/
    TZ=UTC
    ROOT_DOMAIN=example.com
    BESZEL_PUBLIC_KEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI...
-   DOZZLE_REMOTE_AGENT=100.83.191.68:7007,100.71.154.78:7007
+   DOZZLE_REMOTE_AGENT=100.x.y.2:7007,100.x.y.3:7007
    ```
 5. Click **Deploy**.
 
