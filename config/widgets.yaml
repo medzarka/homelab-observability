@@ -4,10 +4,23 @@
 - search:
     provider: google
     target: _blank
+    focus: false
 
 - datetime:
     text_size: xl
     format:
       timeStyle: short
-      dateStyle: medium
+      dateStyle: full
       hour12: false
+
+- openmeteo:
+    label: "Weather"
+    latitude: 48.8566
+    longitude: 2.3522
+    timezone: auto
+    units: metric
+
+- resources:
+    label: "System Load"
+    cpu: true
+    memory: true

@@ -52,7 +52,7 @@
         siteMonitor: "https://litellm.bluewave.work"
 
     - LiteLLM Helper:
-        icon: robot.png
+        icon: si-anthropic
         href: "https://litellm-helper.bluewave.work"
         description: "AI Routing & Prompt Optimization Backend"
         siteMonitor: "https://litellm-helper.bluewave.work"

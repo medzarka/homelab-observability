@@ -2,13 +2,13 @@
 # For configuration documentation visit https://gethomepage.dev/configs/settings/
 
 title: "Bluewave Homelab"
-favicon: "https://bluewave.work/favicon.ico"
+favicon: "https://auth.bluewave.work/favicon.ico"
 theme: dark
 color: slate
-background:
-  image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80"
-  blur: "sm"
-  brightness: 40
+cardBlur: none
+headerStyle: clean
+useEqualHeights: true
+target: _blank
 
 layout:
   Management & Ingress:
@@ -24,10 +24,10 @@ layout:
     style: row
     columns: 2
 
-headerStyle: clean
 showStats: true
 quicklaunch:
   searchDescriptions: true
   hideInternetSearch: false
   showSearchSuggestions: true
   provider: google
+  target: _blank

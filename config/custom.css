@@ -1,0 +1,45 @@
+/* ==============================================================================
+   HOMEPAGE ULTRA-SHARP DARK THEME
+   ============================================================================== */
+
+:root {
+  --bg-color: #080c14;
+  --card-bg: #0f172a;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-border-hover: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.15);
+}
+
+body {
+  background-color: var(--bg-color) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Sharp high-contrast service cards */
+.service-card, .bookmark-card, .widget-card {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Glowing high-tech hover effect */
+.service-card:hover, .bookmark-card:hover {
+  border-color: var(--card-border-hover) !important;
+  box-shadow: 0 0 20px var(--accent-glow), 0 8px 30px rgba(0, 0, 0, 0.6) !important;
+  transform: translateY(-2px);
+}
+
+/* Sharp clean headers */
+h1, h2, h3, .text-xl, .text-lg {
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+/* High-contrast status badges */
+.status-badge {
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
