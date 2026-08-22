@@ -15,7 +15,7 @@ services:
     command:
       - |
         echo ">>> [Storage Init] Setting up worker directories and permissions..."
-        mkdir -p /data
+        mkdir -p /data/beszel-agent
         chmod -R 775 /data
         echo ">>> [Storage Init] Permissions applied. Storage guard active."
         sleep infinity
@@ -30,10 +30,14 @@ services:
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${DATA_DIR:-/home/ubuntu/DATA}/observability/data/beszel-agent:/var/lib/beszel-agent
       - /:/extra-filesystems/root:ro
     environment:
+      - LISTEN=${BESZEL_AGENT_PORT:-45876}
       - PORT=${BESZEL_AGENT_PORT:-45876}
       - KEY=${BESZEL_PUBLIC_KEY:-}
+      - TOKEN=${BESZEL_TOKEN:-}
+      - HUB_URL=${BESZEL_HUB_URL:-}
     logging:
       driver: "json-file"
       options:

@@ -15,7 +15,7 @@ services:
     command:
       - |
         echo ">>> [Storage Init] Setting up directories and permissions..."
-        mkdir -p /data/beszel /data/uptime-kuma /data/homepage/logs
+        mkdir -p /data/beszel /data/beszel-agent /data/uptime-kuma /data/homepage/logs
         chmod -R 775 /data
         touch /data/beszel/id_ed25519 2>/dev/null || true
         chmod 600 /data/beszel/id_ed25519 2>/dev/null || true
@@ -87,10 +87,14 @@ services:
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${DATA_DIR:-/home/mgrsys/DATA}/observability/data/beszel-agent:/var/lib/beszel-agent
       - /:/extra-filesystems/root:ro
     environment:
+      - LISTEN=45876
       - PORT=45876
       - KEY=${BESZEL_PUBLIC_KEY:-}
+      - TOKEN=${BESZEL_TOKEN:-}
+      - HUB_URL=${BESZEL_HUB_URL:-}
     depends_on:
       - beszel
     logging:
