@@ -1,8 +1,8 @@
 ---
 # For configuration documentation visit https://gethomepage.dev/configs/settings/
 
-title: "Bluewave Homelab"
-favicon: "https://auth.bluewave.work/favicon.ico"
+title: "Homelab Cockpit"
+favicon: "https://auth.example.com/favicon.ico"
 theme: dark
 color: slate
 cardBlur: none

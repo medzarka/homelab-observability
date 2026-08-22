@@ -8,10 +8,10 @@ Complete observability, monitoring, logging, and portal suite for the homelab cl
 
 | Service | Public URL | Role | Authentication |
 | :--- | :--- | :--- | :--- |
-| **Homepage** | [`https://homelab.bluewave.work`](https://homelab.bluewave.work) | Unified startpage & cockpit | Authelia SSO |
-| **Beszel Hub** | [`https://metrics.bluewave.work`](https://metrics.bluewave.work) | Multi-node telemetry & bandwidth charts | Authelia 2FA + Native Admin |
-| **Dozzle Hub** | [`https://logs.bluewave.work`](https://logs.bluewave.work) | Centralized multi-node log viewer | Authelia SSO |
-| **Uptime Kuma** | [`https://status.bluewave.work`](https://status.bluewave.work) | Outage alerts & status page | Public View / Native Admin |
+| **Homepage** | `https://homelab.example.com` | Unified startpage & cockpit | Authelia SSO |
+| **Beszel Hub** | `https://metrics.example.com` | Multi-node telemetry & bandwidth charts | Authelia 2FA + Native Admin |
+| **Dozzle Hub** | `https://logs.example.com` | Centralized multi-node log viewer | Authelia SSO |
+| **Uptime Kuma** | `https://status.example.com` | Outage alerts & status page | Public View / Native Admin |
 
 ---
 
@@ -31,7 +31,7 @@ Persistent state is stored cleanly outside the Git repository in the standard ho
 
 ## 🚀 Deployment via Arcane GitOps
 
-1. Open **Arcane Cockpit** at [`https://arcane.bluewave.work`](https://arcane.bluewave.work).
+1. Open **Arcane Cockpit** at `https://arcane.example.com`.
 2. Click **Projects** $\rightarrow$ **New Project**.
 3. Set:
    * **Name:** `observability`
@@ -42,7 +42,7 @@ Persistent state is stored cleanly outside the Git repository in the standard ho
    SYSTEM_USER=mgrsys
    DATA_DIR=/home/mgrsys/DATA
    TZ=UTC
-   HOMEPAGE_ALLOWED_HOSTS=homelab.bluewave.work,hub.bluewave.work,127.0.0.1,localhost
+   HOMEPAGE_ALLOWED_HOSTS=homelab.example.com,hub.example.com,127.0.0.1,localhost
    BESZEL_PUBLIC_KEY=your_key_from_beszel_hub
    DOZZLE_REMOTE_AGENT=100.x.y.1:7007,100.x.y.2:7007
    ```

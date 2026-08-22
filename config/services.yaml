@@ -4,15 +4,15 @@
 - Management & Ingress:
     - Arcane:
         icon: docker.png
-        href: "https://arcane.bluewave.work"
+        href: "https://arcane.example.com"
         description: "Docker Swarm Management & Deployment Cockpit"
-        siteMonitor: "https://arcane.bluewave.work"
+        siteMonitor: "https://arcane.example.com"
 
     - Traefik:
         icon: traefik.png
-        href: "https://traefik.bluewave.work/dashboard/"
+        href: "https://traefik.example.com/dashboard/"
         description: "Edge Ingress Router & Wildcard SSL Gateway"
-        siteMonitor: "https://traefik.bluewave.work/dashboard/"
+        siteMonitor: "https://traefik.example.com/dashboard/"
 
     - Tailscale:
         icon: tailscale.png
@@ -22,50 +22,50 @@
 - Observability & Telemetry:
     - Beszel Metrics:
         icon: grafana.png
-        href: "https://metrics.bluewave.work"
+        href: "https://metrics.example.com"
         description: "Multi-Node Telemetry, Bandwidth & Resource Metrics"
-        siteMonitor: "https://metrics.bluewave.work"
+        siteMonitor: "https://metrics.example.com"
 
     - Dozzle Logs:
         icon: dozzle.png
-        href: "https://logs.bluewave.work"
+        href: "https://logs.example.com"
         description: "Cluster-Wide Live Container Log Streaming"
-        siteMonitor: "https://logs.bluewave.work"
+        siteMonitor: "https://logs.example.com"
 
     - Uptime Kuma:
         icon: uptime-kuma.png
-        href: "https://status.bluewave.work"
+        href: "https://status.example.com"
         description: "Automated Service Health Monitoring & Alerts"
-        siteMonitor: "https://status.bluewave.work"
+        siteMonitor: "https://status.example.com"
 
 - AI & Intelligence:
     - Open-WebUI:
         icon: open-webui.png
-        href: "https://open-webui.bluewave.work"
+        href: "https://open-webui.example.com"
         description: "AI Conversational Workspace & Multi-Model Chat"
-        siteMonitor: "https://open-webui.bluewave.work"
+        siteMonitor: "https://open-webui.example.com"
 
     - LiteLLM Gateway:
         icon: openai.png
-        href: "https://litellm.bluewave.work"
-        description: "Unified AI Proxy & Load Balancer (OCI01-Flex)"
-        siteMonitor: "https://litellm.bluewave.work"
+        href: "https://litellm.example.com"
+        description: "Unified AI Proxy & Load Balancer"
+        siteMonitor: "https://litellm.example.com"
 
     - LiteLLM Helper:
         icon: si-anthropic
-        href: "https://litellm-helper.bluewave.work"
+        href: "https://litellm-helper.example.com"
         description: "AI Routing & Prompt Optimization Backend"
-        siteMonitor: "https://litellm-helper.bluewave.work"
+        siteMonitor: "https://litellm-helper.example.com"
 
 - Cloud Storage & Photos:
     - Immich Photos:
         icon: immich.png
-        href: "https://photos.bluewave.work"
+        href: "https://photos.example.com"
         description: "Self-Hosted High Performance Photo & Video Backup"
-        siteMonitor: "https://photos.bluewave.work"
+        siteMonitor: "https://photos.example.com"
 
     - Seafile Cloud:
         icon: seafile.png
-        href: "https://mycloud.bluewave.work"
+        href: "https://mycloud.example.com"
         description: "Private File Sync & Cloud Storage"
-        siteMonitor: "https://mycloud.bluewave.work"
+        siteMonitor: "https://mycloud.example.com"
