@@ -1,0 +1,13 @@
+---
+# For widget documentation visit https://gethomepage.dev/widgets/
+
+- search:
+    provider: google
+    target: _blank
+
+- datetime:
+    text_size: xl
+    format:
+      timeStyle: short
+      dateStyle: medium
+      hour12: false

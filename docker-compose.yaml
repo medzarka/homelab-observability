@@ -1,0 +1,142 @@
+services:
+
+  # ========================================================
+  # INITIALIZATION SERVICE (Automated Host Storage Setup)
+  # ========================================================
+  init-volumes:
+    image: alpine:latest
+    container_name: observability_init_volumes
+    user: "0:0"
+    restart: "no"
+    network_mode: none
+    volumes:
+      - ${OBSERVABILITY_HOME:-/srv/data/observability}:/data
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo ">>> [Init] Initializing Observability directories..."
+        mkdir -p /data/beszel/data /data/uptime-kuma/data
+        chmod -R 775 /data
+        echo ">>> [Init] Observability storage initialized successfully!"
+
+  # ========================================================
+  # HOMEPAGE (Unified Homelab Startpage & Dashboard)
+  # ========================================================
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TZ=${TZ:-UTC}
+      - HOMEPAGE_ALLOWED_HOSTS=homelab.bluewave.work,hub.bluewave.work,127.0.0.1,localhost
+    networks:
+      - shared_net
+      - homelab_swarm_net
+    depends_on:
+      init-volumes:
+        condition: service_completed_successfully
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ========================================================
+  # BESZEL HUB (Telemetry, Bandwidth & Resource Metrics)
+  # ========================================================
+  beszel:
+    image: henrygd/beszel:latest
+    container_name: beszel
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    volumes:
+      - ${OBSERVABILITY_HOME:-/srv/data/observability}/beszel/data:/beszel_data
+    environment:
+      - PORT=8090
+    networks:
+      - shared_net
+      - homelab_swarm_net
+    depends_on:
+      init-volumes:
+        condition: service_completed_successfully
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ========================================================
+  # BESZEL AGENT (Collector on VM1: zap-vps)
+  # ========================================================
+  beszel-agent:
+    image: henrygd/beszel-agent:latest
+    container_name: beszel_agent
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /:/extra-filesystems/root:ro
+    environment:
+      - PORT=45876
+      - KEY=${BESZEL_PUBLIC_KEY:-}
+    depends_on:
+      - beszel
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ========================================================
+  # DOZZLE HUB (Real-Time Container Log Viewer)
+  # ========================================================
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: dozzle
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - DOZZLE_REMOTE_AGENT=${DOZZLE_REMOTE_AGENT:-}
+      - DOZZLE_LEVEL=info
+    networks:
+      - shared_net
+      - homelab_swarm_net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ========================================================
+  # UPTIME KUMA (Automated Multi-Node Health & Status Alerts)
+  # ========================================================
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime_kuma
+    restart: unless-stopped
+    volumes:
+      - ${OBSERVABILITY_HOME:-/srv/data/observability}/uptime-kuma/data:/app/data
+    networks:
+      - shared_net
+      - homelab_swarm_net
+    depends_on:
+      init-volumes:
+        condition: service_completed_successfully
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  homelab_swarm_net:
+    name: homelab_swarm_net
+    external: true
+  shared_net:
+    name: ${SHARED_NETWORK:-shared_net}
+    external: true

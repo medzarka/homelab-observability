@@ -1,0 +1,13 @@
+---
+# For bookmarks documentation visit https://gethomepage.dev/configs/bookmarks/
+
+- Quick Access:
+    - GitHub Repos:
+        - icon: github.png
+          href: "https://github.com/medzarka"
+    - Cloudflare DNS:
+        - icon: cloudflare.png
+          href: "https://dash.cloudflare.com"
+    - Oracle Cloud:
+        - icon: oracle.png
+          href: "https://cloud.oracle.com"

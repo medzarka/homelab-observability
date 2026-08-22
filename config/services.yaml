@@ -1,0 +1,71 @@
+---
+# For services documentation visit https://gethomepage.dev/configs/services/
+
+- Management & Ingress:
+    - Arcane:
+        icon: docker.png
+        href: "https://arcane.bluewave.work"
+        description: "Docker Swarm Management & Deployment Cockpit"
+        siteMonitor: "https://arcane.bluewave.work"
+
+    - Traefik:
+        icon: traefik.png
+        href: "https://traefik.bluewave.work/dashboard/"
+        description: "Edge Ingress Router & Wildcard SSL Gateway"
+        siteMonitor: "https://traefik.bluewave.work/dashboard/"
+
+    - Tailscale:
+        icon: tailscale.png
+        href: "https://login.tailscale.com/admin/machines"
+        description: "Zero-Trust Encrypted WireGuard Mesh Network"
+
+- Observability & Telemetry:
+    - Beszel Metrics:
+        icon: grafana.png
+        href: "https://metrics.bluewave.work"
+        description: "Multi-Node Telemetry, Bandwidth & Resource Metrics"
+        siteMonitor: "https://metrics.bluewave.work"
+
+    - Dozzle Logs:
+        icon: dozzle.png
+        href: "https://logs.bluewave.work"
+        description: "Cluster-Wide Live Container Log Streaming"
+        siteMonitor: "https://logs.bluewave.work"
+
+    - Uptime Kuma:
+        icon: uptime-kuma.png
+        href: "https://status.bluewave.work"
+        description: "Automated Service Health Monitoring & Alerts"
+        siteMonitor: "https://status.bluewave.work"
+
+- AI & Intelligence:
+    - Open-WebUI:
+        icon: open-webui.png
+        href: "https://open-webui.bluewave.work"
+        description: "AI Conversational Workspace & Multi-Model Chat"
+        siteMonitor: "https://open-webui.bluewave.work"
+
+    - LiteLLM Gateway:
+        icon: openai.png
+        href: "https://litellm.bluewave.work"
+        description: "Unified AI Proxy & Load Balancer (OCI01-Flex)"
+        siteMonitor: "https://litellm.bluewave.work"
+
+    - LiteLLM Helper:
+        icon: robot.png
+        href: "https://litellm-helper.bluewave.work"
+        description: "AI Routing & Prompt Optimization Backend"
+        siteMonitor: "https://litellm-helper.bluewave.work"
+
+- Cloud Storage & Photos:
+    - Immich Photos:
+        icon: immich.png
+        href: "https://photos.bluewave.work"
+        description: "Self-Hosted High Performance Photo & Video Backup"
+        siteMonitor: "https://photos.bluewave.work"
+
+    - Seafile Cloud:
+        icon: seafile.png
+        href: "https://mycloud.bluewave.work"
+        description: "Private File Sync & Cloud Storage"
+        siteMonitor: "https://mycloud.bluewave.work"
