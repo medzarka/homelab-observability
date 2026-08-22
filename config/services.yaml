@@ -57,6 +57,24 @@
         description: "AI Routing & Prompt Optimization Backend"
         siteMonitor: "https://litellm-helper.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
+    - Qdrant Vector DB:
+        icon: si-qdrant
+        href: "https://qdrant.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/dashboard"
+        description: "Vector Database for Agent Embeddings & Document RAG"
+        siteMonitor: "https://qdrant.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - Mem0 Memory Engine:
+        icon: si-fastapi
+        href: "https://mem0.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/docs"
+        description: "Self-Evolving Long-Term Memory Layer for AI Agents"
+        siteMonitor: "https://mem0.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/openapi.json"
+
+    - Neo4j Graph DB:
+        icon: neo4j.png
+        href: "https://neo4j.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Entity Relationship Graph Database for GraphRAG"
+        siteMonitor: "https://neo4j.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
 - Cloud Storage & Photos:
     - Immich Photos:
         icon: immich.png
