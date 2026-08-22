@@ -1,25 +1,6 @@
 services:
 
   # ========================================================
-  # INITIALIZATION SERVICE (Automated Host Storage Setup)
-  # ========================================================
-  init-volumes:
-    image: alpine:latest
-    container_name: observability_init_volumes
-    user: "0:0"
-    restart: "no"
-    network_mode: none
-    volumes:
-      - ${DATA_DIR:-/home/mgrsys/DATA}/observability/data:/data
-    entrypoint: ["/bin/sh", "-c"]
-    command:
-      - |
-        echo ">>> [Init] Initializing Observability persistent storage directories..."
-        mkdir -p /data/beszel /data/uptime-kuma /data/homepage/logs
-        chmod -R 775 /data
-        echo ">>> [Init] Observability storage initialized successfully!"
-
-  # ========================================================
   # HOMEPAGE (Unified Homelab Portal & Service Cockpit)
   # ========================================================
   homepage:
@@ -38,9 +19,6 @@ services:
     networks:
       - shared_net
       - homelab_swarm_net
-    depends_on:
-      init-volumes:
-        condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:3000/api/health"]
       interval: 30s
@@ -69,9 +47,6 @@ services:
     networks:
       - shared_net
       - homelab_swarm_net
-    depends_on:
-      init-volumes:
-        condition: service_completed_successfully
     logging:
       driver: "json-file"
       options:
@@ -133,9 +108,6 @@ services:
     networks:
       - shared_net
       - homelab_swarm_net
-    depends_on:
-      init-volumes:
-        condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "extra/healthcheck"]
       interval: 30s
