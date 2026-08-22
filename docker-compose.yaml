@@ -17,6 +17,8 @@ services:
         echo ">>> [Storage Init] Setting up directories and permissions..."
         mkdir -p /data/beszel /data/uptime-kuma /data/homepage/logs
         chmod -R 775 /data
+        touch /data/beszel/id_ed25519 2>/dev/null || true
+        chmod 600 /data/beszel/id_ed25519 2>/dev/null || true
         echo ">>> [Storage Init] Permissions applied. Storage guard active."
         sleep infinity
 

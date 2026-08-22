@@ -33,7 +33,7 @@ services:
       - /:/extra-filesystems/root:ro
     environment:
       - PORT=${BESZEL_AGENT_PORT:-45876}
-      - KEY=${BESZEL_PUBLIC_KEY}
+      - KEY=${BESZEL_PUBLIC_KEY:-}
     logging:
       driver: "json-file"
       options:
