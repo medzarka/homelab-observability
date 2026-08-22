@@ -10,17 +10,17 @@ services:
     restart: "no"
     network_mode: none
     volumes:
-      - ${OBSERVABILITY_HOME:-/srv/data/observability}:/data
+      - ${DATA_DIR:-/home/mgrsys/DATA}/observability/data:/data
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |
-        echo ">>> [Init] Initializing Observability directories..."
-        mkdir -p /data/beszel/data /data/uptime-kuma/data
+        echo ">>> [Init] Initializing Observability persistent storage directories..."
+        mkdir -p /data/beszel /data/uptime-kuma /data/homepage/logs
         chmod -R 775 /data
         echo ">>> [Init] Observability storage initialized successfully!"
 
   # ========================================================
-  # HOMEPAGE (Unified Homelab Startpage & Dashboard)
+  # HOMEPAGE (Unified Homelab Portal & Service Cockpit)
   # ========================================================
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -28,16 +28,23 @@ services:
     restart: unless-stopped
     volumes:
       - ./config:/app/config
+      - ${DATA_DIR:-/home/mgrsys/DATA}/observability/data/homepage/logs:/app/config/logs
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - TZ=${TZ:-UTC}
-      - HOMEPAGE_ALLOWED_HOSTS=homelab.bluewave.work,hub.bluewave.work,127.0.0.1,localhost
+      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS:-homelab.bluewave.work,hub.bluewave.work,127.0.0.1,localhost}
     networks:
       - shared_net
       - homelab_swarm_net
     depends_on:
       init-volumes:
         condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     logging:
       driver: "json-file"
       options:
@@ -54,7 +61,7 @@ services:
     ports:
       - "8090:8090"
     volumes:
-      - ${OBSERVABILITY_HOME:-/srv/data/observability}/beszel/data:/beszel_data
+      - ${DATA_DIR:-/home/mgrsys/DATA}/observability/data/beszel:/beszel_data
     environment:
       - PORT=8090
     networks:
@@ -113,20 +120,26 @@ services:
         max-file: "3"
 
   # ========================================================
-  # UPTIME KUMA (Automated Multi-Node Health & Status Alerts)
+  # UPTIME KUMA (Multi-Node Health & Outage Alerting)
   # ========================================================
   uptime-kuma:
     image: louislam/uptime-kuma:1
     container_name: uptime_kuma
     restart: unless-stopped
     volumes:
-      - ${OBSERVABILITY_HOME:-/srv/data/observability}/uptime-kuma/data:/app/data
+      - ${DATA_DIR:-/home/mgrsys/DATA}/observability/data/uptime-kuma:/app/data
     networks:
       - shared_net
       - homelab_swarm_net
     depends_on:
       init-volumes:
         condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "extra/healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     logging:
       driver: "json-file"
       options:

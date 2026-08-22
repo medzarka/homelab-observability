@@ -1,55 +1,60 @@
-# 📊 Homelab Observability & Portal Stack
+# 📊 Homelab Observability & Cockpit Stack (Homepage, Beszel, Dozzle, Uptime Kuma)
 
-The **Homelab Observability & Portal Stack** provides a comprehensive telemetry, log aggregation, automated uptime monitoring, and startpage cockpit for the 3-node homelab cluster.
-
----
-
-## 🏛️ Services & Access Points
-
-| Application | Subdomain | Role |
-| :--- | :--- | :--- |
-| **Homepage** | [`https://homelab.bluewave.work`](https://homelab.bluewave.work) | Unified Homelab Cockpit & Service Cards |
-| **Beszel Hub** | [`https://metrics.bluewave.work`](https://metrics.bluewave.work) | Real-Time Multi-Node CPU, RAM, Disk & Bandwidth Metrics |
-| **Dozzle** | [`https://logs.bluewave.work`](https://logs.bluewave.work) | Cluster-Wide Real-Time Container Log Viewer |
-| **Uptime Kuma** | [`https://status.bluewave.work`](https://status.bluewave.work) | Multi-Node Service Health & Alerting |
+Complete observability, monitoring, logging, and portal suite for the homelab cluster.
 
 ---
 
-## 🚀 Deployment on Primary Node (`zap-vps`)
+## 🏛️ Stack Architecture & Endpoints
 
-### 1. Configure Environment
-```bash
-cp .env.example .env
-# Edit .env and adjust OBSERVABILITY_HOME if needed
+| Service | Public URL | Role | Authentication |
+| :--- | :--- | :--- | :--- |
+| **Homepage** | [`https://homelab.bluewave.work`](https://homelab.bluewave.work) | Unified startpage & cockpit | Authelia SSO |
+| **Beszel Hub** | [`https://metrics.bluewave.work`](https://metrics.bluewave.work) | Multi-node telemetry & bandwidth charts | Authelia 2FA + Native Admin |
+| **Dozzle Hub** | [`https://logs.bluewave.work`](https://logs.bluewave.work) | Centralized multi-node log viewer | Authelia SSO |
+| **Uptime Kuma** | [`https://status.bluewave.work`](https://status.bluewave.work) | Outage alerts & status page | Public View / Native Admin |
+
+---
+
+## 💾 Standard Data & Storage Template
+
+Persistent state is stored cleanly outside the Git repository in the standard homelab hierarchy:
+
 ```
-
-### 2. Start the Stack
-```bash
-docker compose up -d
+/home/${SYSTEM_USER}/DATA/observability/data/
+├── beszel/                    # Beszel historical resource & bandwidth database
+├── uptime-kuma/               # Uptime Kuma monitoring & alert SQLite database
+└── homepage/
+    └── logs/                  # Homepage application logs
 ```
 
 ---
 
-## 🤖 Remote Agents on Worker Nodes (`oci01-flex` & `orangepi5plus`)
+## 🚀 Deployment via Arcane GitOps
 
-To stream logs and telemetry from VM2 and VM3 to the central Hubs on VM1:
+1. Open **Arcane Cockpit** at [`https://arcane.bluewave.work`](https://arcane.bluewave.work).
+2. Click **Projects** $\rightarrow$ **New Project**.
+3. Set:
+   * **Name:** `observability`
+   * **Git Repository:** `https://github.com/medzarka/homelab-observability.git`
+   * **Branch:** `main`
+4. Add Environment Variables (from `.env.example`):
+   ```env
+   SYSTEM_USER=mgrsys
+   DATA_DIR=/home/mgrsys/DATA
+   TZ=UTC
+   HOMEPAGE_ALLOWED_HOSTS=homelab.bluewave.work,hub.bluewave.work,127.0.0.1,localhost
+   BESZEL_PUBLIC_KEY=your_key_from_beszel_hub
+   DOZZLE_REMOTE_AGENT=100.83.191.68:7007,100.71.154.78:7007
+   ```
+5. Click **Deploy**.
 
-### 1. Beszel Agent (Telemetry & Bandwidth Collector)
-Run on each worker node:
-```bash
-docker run -d \
-  --name beszel_agent \
-  --restart unless-stopped \
-  --network host \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /:/extra-filesystems/root:ro \
-  -e PORT=45876 \
-  -e KEY="<YOUR_BESZEL_PUBLIC_KEY_FROM_HUB>" \
-  henrygd/beszel-agent:latest
-```
+---
 
-### 2. Dozzle Agent (Container Log Collector)
-Run on each worker node:
+## 📡 Deploying Agents on Worker Nodes (VM2, VM3, etc.)
+
+On any remote worker node (e.g. `oci01-flex` or `orangepi5plus`):
+
+### 1. Run Dozzle Remote Log Agent:
 ```bash
 docker run -d \
   --name dozzle_agent \
@@ -58,4 +63,16 @@ docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   amir20/dozzle:latest agent
 ```
-*(Port 7007 is secured behind Tailscale mesh and blocked by Firewalld from the public internet).*
+
+### 2. Run Beszel Telemetry Agent:
+```bash
+docker run -d \
+  --name beszel_agent \
+  --restart unless-stopped \
+  --network host \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -v /:/extra-filesystems/root:ro \
+  -e PORT=45876 \
+  -e KEY="<YOUR_BESZEL_PUBLIC_KEY>" \
+  henrygd/beszel-agent:latest
+```

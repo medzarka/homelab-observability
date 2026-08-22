@@ -1,0 +1,17 @@
+# Environment & Local Secrets
+.env
+*.env.local
+
+# Persistent Data Directories
+data/
+*/data/
+
+# Databases & Runtime Logs
+*.sqlite3
+*.db
+*.log
+config/logs/
+
+# System Files
+.DS_Store
+*.swp
