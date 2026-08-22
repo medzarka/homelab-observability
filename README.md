@@ -42,7 +42,7 @@ Persistent state is stored cleanly outside the Git repository in the standard ho
    SYSTEM_USER=mgrsys
    DATA_DIR=/home/mgrsys/DATA
    TZ=UTC
-   HOMEPAGE_ALLOWED_HOSTS=homelab.example.com,hub.example.com,127.0.0.1,localhost
+   ROOT_DOMAIN=example.com
    BESZEL_PUBLIC_KEY=your_key_from_beszel_hub
    DOZZLE_REMOTE_AGENT=100.x.y.1:7007,100.x.y.2:7007
    ```

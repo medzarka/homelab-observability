@@ -4,15 +4,15 @@
 - Management & Ingress:
     - Arcane:
         icon: docker.png
-        href: "https://arcane.example.com"
+        href: "https://arcane.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
         description: "Docker Swarm Management & Deployment Cockpit"
-        siteMonitor: "https://arcane.example.com"
+        siteMonitor: "https://arcane.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
     - Traefik:
         icon: traefik.png
-        href: "https://traefik.example.com/dashboard/"
+        href: "https://traefik.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/dashboard/"
         description: "Edge Ingress Router & Wildcard SSL Gateway"
-        siteMonitor: "https://traefik.example.com/dashboard/"
+        siteMonitor: "https://traefik.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/dashboard/"
 
     - Tailscale:
         icon: tailscale.png
@@ -22,50 +22,50 @@
 - Observability & Telemetry:
     - Beszel Metrics:
         icon: grafana.png
-        href: "https://metrics.example.com"
+        href: "https://metrics.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
         description: "Multi-Node Telemetry, Bandwidth & Resource Metrics"
-        siteMonitor: "https://metrics.example.com"
+        siteMonitor: "https://metrics.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
     - Dozzle Logs:
         icon: dozzle.png
-        href: "https://logs.example.com"
+        href: "https://logs.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
         description: "Cluster-Wide Live Container Log Streaming"
-        siteMonitor: "https://logs.example.com"
+        siteMonitor: "https://logs.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
     - Uptime Kuma:
         icon: uptime-kuma.png
-        href: "https://status.example.com"
+        href: "https://status.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
         description: "Automated Service Health Monitoring & Alerts"
-        siteMonitor: "https://status.example.com"
+        siteMonitor: "https://status.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
 - AI & Intelligence:
     - Open-WebUI:
         icon: open-webui.png
-        href: "https://open-webui.example.com"
+        href: "https://open-webui.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
         description: "AI Conversational Workspace & Multi-Model Chat"
-        siteMonitor: "https://open-webui.example.com"
+        siteMonitor: "https://open-webui.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
     - LiteLLM Gateway:
         icon: openai.png
-        href: "https://litellm.example.com"
+        href: "https://litellm.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
         description: "Unified AI Proxy & Load Balancer"
-        siteMonitor: "https://litellm.example.com"
+        siteMonitor: "https://litellm.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
     - LiteLLM Helper:
         icon: si-anthropic
-        href: "https://litellm-helper.example.com"
+        href: "https://litellm-helper.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
         description: "AI Routing & Prompt Optimization Backend"
-        siteMonitor: "https://litellm-helper.example.com"
+        siteMonitor: "https://litellm-helper.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
 - Cloud Storage & Photos:
     - Immich Photos:
         icon: immich.png
-        href: "https://photos.example.com"
+        href: "https://photos.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
         description: "Self-Hosted High Performance Photo & Video Backup"
-        siteMonitor: "https://photos.example.com"
+        siteMonitor: "https://photos.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
     - Seafile Cloud:
         icon: seafile.png
-        href: "https://mycloud.example.com"
+        href: "https://mycloud.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
         description: "Private File Sync & Cloud Storage"
-        siteMonitor: "https://mycloud.example.com"
+        siteMonitor: "https://mycloud.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"

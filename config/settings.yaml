@@ -2,7 +2,7 @@
 # For configuration documentation visit https://gethomepage.dev/configs/settings/
 
 title: "Homelab Cockpit"
-favicon: "https://auth.example.com/favicon.ico"
+favicon: "https://auth.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/favicon.ico"
 theme: dark
 color: slate
 cardBlur: none

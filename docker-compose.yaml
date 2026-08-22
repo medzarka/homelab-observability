@@ -32,7 +32,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - TZ=${TZ:-UTC}
-      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS:-homelab.example.com,hub.example.com,127.0.0.1,localhost}
+      - ROOT_DOMAIN=${ROOT_DOMAIN:-example.com}
+      - HOMEPAGE_VAR_ROOT_DOMAIN=${ROOT_DOMAIN:-example.com}
+      - HOMEPAGE_ALLOWED_HOSTS=homelab.${ROOT_DOMAIN:-example.com},hub.${ROOT_DOMAIN:-example.com},127.0.0.1,localhost
     networks:
       - shared_net
       - homelab_swarm_net
