@@ -19,6 +19,12 @@
         href: "https://login.tailscale.com/admin/machines"
         description: "Zero-Trust Encrypted WireGuard Mesh Network"
 
+    - LLDAP Directory:
+        icon: authentik.png
+        href: "https://lldap.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Lightweight LDAP User, Group & Identity Management"
+        siteMonitor: "https://lldap.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
 - Observability & Telemetry:
     - Beszel Metrics:
         icon: grafana.png
