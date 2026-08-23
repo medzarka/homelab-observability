@@ -2,5 +2,4 @@
 # For docker connection documentation visit https://gethomepage.dev/configs/docker/
 
 local-socket:
-  host: socket-proxy
-  port: 2375
+  socket: /var/run/docker.sock
