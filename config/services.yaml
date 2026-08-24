@@ -1,95 +1,192 @@
 ---
-# For services documentation visit https://gethomepage.dev/configs/services/
+# ==============================================================================
+# HOMEPAGE CENTRAL SERVICE COCKPIT (services.yaml)
+# Managed by Homelab Infrastructure
+# ==============================================================================
 
-- Management & Ingress:
-    - Arcane:
-        icon: docker.png
-        href: "https://arcane.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "Docker Swarm Management & Deployment Cockpit"
-        siteMonitor: "https://arcane.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-
-    - Traefik:
+- Ingress & Infrastructure:
+    - Traefik Gateway:
         icon: traefik.png
         href: "https://traefik.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/dashboard/"
         description: "Edge Ingress Router & Wildcard SSL Gateway"
         siteMonitor: "https://traefik.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/dashboard/"
 
-    - Tailscale:
+    - Authelia SSO:
+        icon: authentik.png
+        href: "https://auth.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Centralized Single Sign-On & Multi-Factor Auth"
+        siteMonitor: "https://auth.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/api/health"
+
+    - Arcane Swarm:
+        icon: docker.png
+        href: "https://arcane.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Cluster Swarm Manager & Deployment Cockpit"
+        siteMonitor: "https://arcane.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - LLDAP Directory:
+        icon: openldap.png
+        href: "https://lldap.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Lightweight LDAP User & Group Directory"
+        siteMonitor: "https://lldap.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - Tailscale Mesh:
         icon: tailscale.png
         href: "https://login.tailscale.com/admin/machines"
         description: "Zero-Trust Encrypted WireGuard Mesh Network"
 
-    - LLDAP Directory:
-        icon: authentik.png
-        href: "https://lldap.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "Lightweight LDAP User, Group & Identity Management"
-        siteMonitor: "https://lldap.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-
 - Observability & Telemetry:
-    - Beszel Metrics:
+    - Beszel Telemetry:
         icon: grafana.png
         href: "https://metrics.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "Multi-Node Telemetry, Bandwidth & Resource Metrics"
+        description: "Cluster-Wide CPU, RAM, Disk & Network Metrics"
         siteMonitor: "https://metrics.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
     - Dozzle Logs:
         icon: dozzle.png
         href: "https://logs.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "Cluster-Wide Live Container Log Streaming"
+        description: "Multi-Node Real-Time Container Log Streamer"
         siteMonitor: "https://logs.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
     - Uptime Kuma:
         icon: uptime-kuma.png
         href: "https://status.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "Automated Service Health Monitoring & Alerts"
+        description: "Automated Service Health Monitoring & Ping Alerts"
         siteMonitor: "https://status.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
-- AI & Intelligence:
+- AI Agents & Workspace:
     - Open-WebUI:
         icon: open-webui.png
         href: "https://open-webui.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "AI Conversational Workspace & Multi-Model Chat"
+        description: "Multi-Model AI Chat & Document Analysis Studio"
         siteMonitor: "https://open-webui.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - Hermes Agent:
+        icon: si-robotframework
+        href: "https://hermes.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Autonomous Agent Cockpit, Gateway & Task Runner"
+        siteMonitor: "https://hermes.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
     - LiteLLM Gateway:
         icon: openai.png
         href: "https://litellm.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "Unified AI Proxy & Load Balancer"
-        siteMonitor: "https://litellm.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Unified AI Proxy, Router & Load Balancer"
+        siteMonitor: "https://litellm.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/health/readiness"
 
     - LiteLLM Helper:
         icon: si-anthropic
         href: "https://litellm-helper.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "AI Routing & Prompt Optimization Backend"
+        description: "Dynamic Model Registry & Notification Dispatcher"
         siteMonitor: "https://litellm-helper.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+- AI Memory, Graph & Knowledge MCPs:
+    - Knowledge Hub MCP:
+        icon: si-fastapi
+        href: "https://knowledge-mcp.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/health"
+        description: "Multi-Modal Ingestion & Semantic Knowledge Gateway"
+        siteMonitor: "https://knowledge-mcp.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/health"
+
+    - Agent Sandbox MCP:
+        icon: si-gnubash
+        href: "https://sandbox.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/health"
+        description: "RAM-Isolated Dual MCP Compiler & Execution Engine"
+        siteMonitor: "https://sandbox.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/health"
 
     - Qdrant Vector DB:
         icon: si-qdrant
         href: "https://qdrant.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/dashboard"
-        description: "Vector Database for Agent Embeddings & Document RAG"
+        description: "Vector Database for Agent Embeddings & Hybrid Search"
         siteMonitor: "https://qdrant.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
     - Mem0 Memory Engine:
-        icon: si-fastapi
+        icon: si-databricks
         href: "https://mem0.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/docs"
-        description: "Self-Evolving Long-Term Memory Layer for AI Agents"
+        description: "Self-Evolving Episodic Long-Term Memory Layer"
         siteMonitor: "https://mem0.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/openapi.json"
 
     - Neo4j Graph DB:
         icon: neo4j.png
         href: "https://neo4j.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "Entity Relationship Graph Database for GraphRAG"
+        description: "Entity Knowledge Graph for Structural GraphRAG"
         siteMonitor: "https://neo4j.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
-- Cloud Storage & Photos:
-    - Immich Photos:
-        icon: immich.png
-        href: "https://photos.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "Self-Hosted High Performance Photo & Video Backup"
-        siteMonitor: "https://photos.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+- AI Compute & Scraping Nodes (zap-srv):
+    - SearXNG Search:
+        icon: searxng.png
+        href: "https://search.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Private Metasearch Engine for AI Agent Retrieval"
+        siteMonitor: "https://search.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
+    - Firecrawl Scraper:
+        icon: si-firefoxbrowser
+        href: "https://scraper.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Full-Page LLM Web Scraper & Playwright Engine"
+        siteMonitor: "https://scraper.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - Speaches Audio:
+        icon: si-podcast
+        href: "https://audio.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/docs"
+        description: "Whisper-Large-v3 STT & Kokoro Neural TTS"
+        siteMonitor: "https://audio.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/health"
+
+    - Speaches Voice Console:
+        icon: si-podcast
+        href: "https://voice.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Realtime Voice & Audio Testing Console"
+        siteMonitor: "https://voice.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - Ollama Vision:
+        icon: si-ollama
+        href: "https://ollama.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Local Vision (Qwen2.5-VL) & LLM Inference in RAM"
+        siteMonitor: "https://ollama.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+- Development & Workspace:
+    - JupyterLab:
+        icon: jupyter.png
+        href: "https://jupyter.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Interactive Data Science, Python & ML Experiments"
+        siteMonitor: "https://jupyter.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - VS Code Server:
+        icon: visual-studio-code.png
+        href: "https://code.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Cloud Web IDE with Pre-Configured Toolchains"
+        siteMonitor: "https://code.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+- Cloud Storage & Collaboration:
     - Seafile Cloud:
         icon: seafile.png
         href: "https://mycloud.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "Private File Sync & Cloud Storage"
+        description: "Encrypted Cloud File Sync & Team Library"
         siteMonitor: "https://mycloud.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - OnlyOffice Docs:
+        icon: onlyoffice.png
+        href: "https://onlyoffice-doc-server.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Collaborative Real-Time Office Document Editor"
+        siteMonitor: "https://onlyoffice-doc-server.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/healthcheck"
+
+    - Immich Photos:
+        icon: immich.png
+        href: "https://photos.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Automated Smartphone Photo & Video Backup"
+        siteMonitor: "https://photos.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+- Media & Entertainment:
+    - Jellyfin:
+        icon: jellyfin.png
+        href: "https://jellyfin.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Self-Hosted 4K Streaming Media Server"
+        siteMonitor: "https://jellyfin.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - Navidrome Music:
+        icon: navidrome.png
+        href: "https://music.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "High-Resolution Music Streaming Server"
+        siteMonitor: "https://music.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - qBittorrent:
+        icon: qbittorrent.png
+        href: "https://torrents.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Headless BitTorrent Download Client"
+        siteMonitor: "https://torrents.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
