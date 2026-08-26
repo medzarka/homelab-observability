@@ -1,3 +1,15 @@
+> ### 🌐 [Homelab Sovereign Cluster Architecture](https://github.com/medzarka/homelab-nodes)
+> This repository is a modular component of the **Homelab Sovereign Multi-Node Cluster** — an enterprise-grade, privacy-first, self-hosted infrastructure spanning cloud VPS, on-premise compute servers, and edge ARM nodes.
+> 
+> * **Zero-Trust Network**: Multi-host WireGuard mesh interconnect via **Tailscale** with strict **Firewalld** zoning (`iptables: false`).
+> * **Unified Identity & Ingress**: Centralized reverse proxy via **Traefik v3**, **Authelia SSO (2FA)**, and **LLDAP Directory**.
+> * **Cluster Orchestration & GitOps**: High-availability **Docker Swarm** managed declaratively via **Arcane Cockpit**.
+> * **End-to-End Observability**: Centralized portal (**Homepage**), metrics (**Beszel**), real-time logs (**Dozzle**), and uptime monitoring (**Uptime Kuma**).
+> * **Sovereign Local AI & Compute**: Distributed inference (**LiteLLM**, **Ollama**, **Qdrant**, **Mem0**, **Hermes Agents**).
+> * **Private Cloud & Storage**: Encrypted data synchronization, automated backups, and multi-cloud mirrors.
+
+---
+
 # 📊 Homelab Observability & Cockpit Stack (Homepage, Beszel, Dozzle, Uptime Kuma)
 
 Complete observability, monitoring, logging, and portal suite for the homelab cluster.
@@ -30,7 +42,7 @@ homelab-observability/
 
 ---
 
-## 🚀 1. Manager Node Deployment (`zap-vps`)
+## 🚀 1. Manager Node Deployment (Master Node)
 
 ### Via Arcane Cockpit (Recommended):
 1. Open **Arcane** at `https://arcane.example.com`.
@@ -41,8 +53,8 @@ homelab-observability/
    * **Branch:** `main`
 4. Set Environment Variables (from `.env.example`):
    ```env
-   SYSTEM_USER=mgrsys
-   DATA_DIR=/home/mgrsys/DATA
+   SYSTEM_USER=homelab
+   DATA_DIR=/home/homelab/DATA
    TZ=UTC
    ROOT_DOMAIN=example.com
    BESZEL_PUBLIC_KEY=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI...
@@ -52,7 +64,7 @@ homelab-observability/
 
 ---
 
-## 📡 2. Worker Node Deployment (`oci01-flex`, `orangepi`, etc.)
+## 📡 2. Worker Node Deployment (Worker / Edge Nodes)
 
 Deploy the ultra-lightweight agent stack on any worker node.
 

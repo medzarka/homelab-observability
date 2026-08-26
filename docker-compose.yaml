@@ -151,7 +151,7 @@ services:
 
 networks:
   homelab_swarm_net:
-    name: homelab_swarm_net
+    name: ${SWARM_NETWORK:-homelab_swarm_net}
     external: true
   shared_net:
     name: ${SHARED_NETWORK:-shared_net}
