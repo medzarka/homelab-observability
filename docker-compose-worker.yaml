@@ -52,16 +52,12 @@ services:
     container_name: dozzle_agent
     restart: unless-stopped
     command: agent
-    ports:
-      - "7007:7007"
+    network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - DOZZLE_LEVEL=info
       - DOZZLE_NO_ANALYTICS=true
-    networks:
-      - shared_net
-      - homelab_swarm_net
     logging:
       driver: "json-file"
       options:
