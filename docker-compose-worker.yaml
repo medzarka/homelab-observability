@@ -53,7 +53,7 @@ services:
     restart: unless-stopped
     command: agent
     ports:
-      - "${TS_NODE_IP:-0.0.0.0}:7007:7007"
+      - "7007:7007"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
