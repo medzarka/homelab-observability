@@ -82,9 +82,10 @@ services:
   # ========================================================
   beszel-agent:
     image: henrygd/beszel-agent:latest
-    container_name: beszel_agent
+    container_name: beszel_agent_${NODE_NAME:-master}
     restart: unless-stopped
-    network_mode: host
+    networks:
+      - homelab_swarm_net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}/observability/data/beszel-agent:/var/lib/beszel-agent

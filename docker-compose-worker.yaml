@@ -11,7 +11,7 @@ services:
     network_mode: none
     volumes:
       - ${DATA_DIR:-/home/ubuntu/DATA}/observability/data:/data
-    entrypoint: ["/bin/sh", "-c"]
+    entrypoint: [ "/bin/sh", "-c" ]
     command:
       - |
         echo ">>> [Storage Init] Setting up worker directories and permissions..."
@@ -25,9 +25,10 @@ services:
   # ========================================================
   beszel-agent:
     image: henrygd/beszel-agent:latest
-    container_name: beszel_agent
+    container_name: beszel_agent_${NODE_NAME:-worker}
     restart: unless-stopped
-    network_mode: host
+    networks:
+      - homelab_swarm_net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${DATA_DIR:-/home/ubuntu/DATA}/observability/data/beszel-agent:/var/lib/beszel-agent
@@ -49,10 +50,11 @@ services:
   # ========================================================
   dozzle-agent:
     image: amir20/dozzle:latest
-    container_name: dozzle_agent
+    container_name: dozzle_agent_${NODE_NAME:-worker}
     restart: unless-stopped
     command: agent
-    network_mode: host
+    networks:
+      - homelab_swarm_net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
