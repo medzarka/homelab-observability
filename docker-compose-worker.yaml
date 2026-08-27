@@ -25,7 +25,7 @@ services:
   # ========================================================
   beszel-agent:
     image: henrygd/beszel-agent:latest
-    container_name: beszel_agent_${NODE_NAME:-worker}
+    container_name: beszel_agent_${DOCKER_NODE_ID:-worker}
     restart: unless-stopped
     networks:
       - homelab_swarm_net
@@ -50,7 +50,7 @@ services:
   # ========================================================
   dozzle-agent:
     image: amir20/dozzle:latest
-    container_name: dozzle_agent_${NODE_NAME:-worker}
+    container_name: dozzle_agent_${DOCKER_NODE_ID:-worker}
     restart: unless-stopped
     command: agent
     networks:
@@ -60,11 +60,18 @@ services:
     environment:
       - DOZZLE_LEVEL=info
       - DOZZLE_NO_ANALYTICS=true
+      - DOZZLE_HOSTNAME=${NODE_NAME:-worker}
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
+    healthcheck:
+      test: [ "CMD", "/dozzle", "healthcheck" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
 
 networks:
   shared_net:

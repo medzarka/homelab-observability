@@ -114,8 +114,10 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
+      - DOZZLE_HOSTNAME=master-node
       - DOZZLE_REMOTE_AGENT=${DOZZLE_REMOTE_AGENT:-}
       - DOZZLE_LEVEL=info
+      - DOZZLE_ADDR=:8080
       - DOZZLE_NO_ANALYTICS=true
     networks:
       - shared_net
@@ -125,6 +127,12 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+    healthcheck:
+      test: [ "CMD", "/dozzle", "healthcheck" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
 
   # ========================================================
   # UPTIME KUMA (Multi-Node Health & Outage Alerting)
