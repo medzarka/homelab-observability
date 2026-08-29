@@ -47,6 +47,14 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homepage.rule=Host(`homelab.${ROOT_DOMAIN:-example.com}`, `hub.${ROOT_DOMAIN:-example.com}`)"
+      - "traefik.http.routers.homepage.entrypoints=websecure"
+      - "traefik.http.routers.homepage.tls=true"
+      - "traefik.http.routers.homepage.middlewares=authelia-sso@file,app-fail2ban@file,security-headers@file,compression@file"
+      - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+      - "traefik.docker.network=${SHARED_NETWORK:-shared_net}"
     logging:
       driver: "json-file"
       options:
@@ -69,6 +77,14 @@ services:
     networks:
       - shared_net
       - homelab_swarm_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.beszel.rule=Host(`metrics.${ROOT_DOMAIN:-example.com}`, `beszel.${ROOT_DOMAIN:-example.com}`)"
+      - "traefik.http.routers.beszel.entrypoints=websecure"
+      - "traefik.http.routers.beszel.tls=true"
+      - "traefik.http.routers.beszel.middlewares=authelia-sso@file,app-fail2ban@file,security-headers@file,compression@file"
+      - "traefik.http.services.beszel.loadbalancer.server.port=8090"
+      - "traefik.docker.network=${SHARED_NETWORK:-shared_net}"
     logging:
       driver: "json-file"
       options:
@@ -120,6 +136,14 @@ services:
     networks:
       - shared_net
       - homelab_swarm_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dozzle.rule=Host(`logs.${ROOT_DOMAIN:-example.com}`, `dozzle.${ROOT_DOMAIN:-example.com}`)"
+      - "traefik.http.routers.dozzle.entrypoints=websecure"
+      - "traefik.http.routers.dozzle.tls=true"
+      - "traefik.http.routers.dozzle.middlewares=authelia-sso@file,app-fail2ban@file,security-headers@file"
+      - "traefik.http.services.dozzle.loadbalancer.server.port=8080"
+      - "traefik.docker.network=${SHARED_NETWORK:-shared_net}"
     logging:
       driver: "json-file"
       options:
@@ -144,6 +168,14 @@ services:
     networks:
       - shared_net
       - homelab_swarm_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.uptime-kuma.rule=Host(`status.${ROOT_DOMAIN:-example.com}`, `uptimekuma.${ROOT_DOMAIN:-example.com}`)"
+      - "traefik.http.routers.uptime-kuma.entrypoints=websecure"
+      - "traefik.http.routers.uptime-kuma.tls=true"
+      - "traefik.http.routers.uptime-kuma.middlewares=app-fail2ban@file,security-headers@file,compression@file"
+      - "traefik.http.services.uptime-kuma.loadbalancer.server.port=3001"
+      - "traefik.docker.network=${SHARED_NETWORK:-shared_net}"
     healthcheck:
       test: [ "CMD", "extra/healthcheck" ]
       interval: 30s
