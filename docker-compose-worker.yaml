@@ -39,6 +39,8 @@ services:
       - KEY=${BESZEL_PUBLIC_KEY:-}
       - TOKEN=${BESZEL_TOKEN:-}
       - HUB_URL=${BESZEL_HUB_URL:-}
+    depends_on:
+      - storage-init
     logging:
       driver: "json-file"
       options:

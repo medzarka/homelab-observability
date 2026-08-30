@@ -11,18 +11,30 @@ useEqualHeights: true
 target: _blank
 
 layout:
-  Management & Ingress:
+  Ingress & Infrastructure:
     style: row
     columns: 3
   Observability & Telemetry:
     style: row
     columns: 3
-  AI & Intelligence:
-    style: row
-    columns: 3
-  Cloud Storage & Photos:
+  AI Agents & Workspace:
     style: row
     columns: 2
+  AI Memory, Graph & Knowledge MCPs:
+    style: row
+    columns: 3
+  AI Compute & Scraping Nodes (zap-srv):
+    style: row
+    columns: 3
+  Development & Workspace:
+    style: row
+    columns: 2
+  Cloud Storage & Collaboration:
+    style: row
+    columns: 3
+  Media & Entertainment:
+    style: row
+    columns: 3
 
 showStats: true
 quicklaunch:

@@ -41,6 +41,8 @@ services:
     networks:
       - shared_net
       - homelab_swarm_net
+    depends_on:
+      - storage-init
     healthcheck:
       test: [ "CMD", "wget", "--spider", "-q", "http://127.0.0.1:3000/" ]
       interval: 30s
@@ -77,6 +79,8 @@ services:
     networks:
       - shared_net
       - homelab_swarm_net
+    depends_on:
+      - storage-init
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.beszel.rule=Host(`metrics.${ROOT_DOMAIN:-example.com}`, `beszel.${ROOT_DOMAIN:-example.com}`)"
@@ -111,6 +115,7 @@ services:
       - TOKEN=${BESZEL_TOKEN:-}
       - HUB_URL=${BESZEL_HUB_URL:-}
     depends_on:
+      - storage-init
       - beszel
     logging:
       driver: "json-file"
@@ -168,6 +173,8 @@ services:
     networks:
       - shared_net
       - homelab_swarm_net
+    depends_on:
+      - storage-init
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.uptime-kuma.rule=Host(`status.${ROOT_DOMAIN:-example.com}`, `uptimekuma.${ROOT_DOMAIN:-example.com}`)"
