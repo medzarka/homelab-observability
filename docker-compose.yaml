@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     network_mode: none
     volumes:
-      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}/observability/data:/data
+      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}:/data
     entrypoint: [ "/bin/sh", "-c" ]
     command:
       - |
@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./config:/app/config
-      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}/observability/data/homepage/logs:/app/config/logs
+      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}/homepage/logs:/app/config/logs
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - TZ=${TZ:-UTC}
@@ -76,7 +76,7 @@ services:
     container_name: beszel
     restart: unless-stopped
     volumes:
-      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}/observability/data/beszel:/beszel_data
+      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}/beszel:/beszel_data
     environment:
       - PORT=8090
     extra_hosts:
@@ -112,7 +112,7 @@ services:
       - homelab_swarm_net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}/observability/data/beszel-agent:/var/lib/beszel-agent
+      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}/beszel-agent:/var/lib/beszel-agent
       - /:/extra-filesystems/root:ro
     environment:
       - LISTEN=45876
@@ -176,7 +176,7 @@ services:
     container_name: uptime_kuma
     restart: unless-stopped
     volumes:
-      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}/observability/data/uptime-kuma:/app/data
+      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA}/uptime-kuma:/app/data
     networks:
       - shared_net
       - homelab_swarm_net
