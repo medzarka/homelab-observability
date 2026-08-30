@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     network_mode: none
     volumes:
-      - ${DATA_DIR:-/home/ubuntu/DATA}:/data
+      - ${DATA_DIR:-/home/${SYSTEM_USER:-ubuntu}/DATA/var/observability}:/data
     entrypoint: [ "/bin/sh", "-c" ]
     command:
       - |
@@ -31,7 +31,7 @@ services:
       - homelab_swarm_net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${DATA_DIR:-/home/ubuntu/DATA}/beszel-agent:/var/lib/beszel-agent
+      - ${DATA_DIR:-/home/${SYSTEM_USER:-ubuntu}/DATA/var/observability}/beszel-agent:/var/lib/beszel-agent
       - /:/extra-filesystems/root:ro
     environment:
       - LISTEN=${BESZEL_AGENT_PORT:-45876}
