@@ -17,8 +17,12 @@ services:
         echo ">>> [Storage Init] Setting up directories and permissions..."
         mkdir -p /data/beszel /data/beszel-agent /data/uptime-kuma /data/homepage/logs
         chmod -R 775 /data
-        touch /data/beszel/id_ed25519 2>/dev/null || true
-        chmod 600 /data/beszel/id_ed25519 2>/dev/null || true
+        # Remove 0-byte key if created previously so Beszel can generate a valid keypair
+        if [ -f /data/beszel/id_ed25519 ] && [ ! -s /data/beszel/id_ed25519 ]; then
+          echo ">>> [Storage Init] Removing empty 0-byte id_ed25519 file..."
+          rm -f /data/beszel/id_ed25519
+        fi
+        [ -f /data/beszel/id_ed25519 ] && chmod 600 /data/beszel/id_ed25519 || true
         echo ">>> [Storage Init] Permissions applied. Storage guard active."
         sleep infinity
 
