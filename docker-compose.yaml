@@ -28,7 +28,7 @@ services:
         sleep infinity
 
     healthcheck:
-      test: ["CMD", "test", "-f", "/data/.init_done"]
+      test: [ "CMD", "test", "-f", "/data/.init_done" ]
       interval: 5s
       timeout: 5s
       retries: 10
