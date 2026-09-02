@@ -24,7 +24,15 @@ services:
         fi
         [ -f /data/beszel/id_ed25519 ] && chmod 600 /data/beszel/id_ed25519 || true
         echo ">>> [Storage Init] Permissions applied. Storage guard active."
+        touch /data/.init_done
         sleep infinity
+
+    healthcheck:
+      test: ["CMD", "test", "-f", "/data/.init_done"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
 
   # ========================================================
   # HOMEPAGE (Unified Homelab Portal & Service Cockpit)
@@ -46,7 +54,8 @@ services:
       - shared_net
       - homelab_swarm_net
     depends_on:
-      - storage-init
+      storage-init:
+        condition: service_healthy
     healthcheck:
       test: [ "CMD", "wget", "--spider", "-q", "http://127.0.0.1:3000/" ]
       interval: 30s
@@ -86,7 +95,8 @@ services:
       - shared_net
       - homelab_swarm_net
     depends_on:
-      - storage-init
+      storage-init:
+        condition: service_healthy
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.beszel.rule=Host(`metrics.${ROOT_DOMAIN:-example.com}`) || Host(`beszel.${ROOT_DOMAIN:-example.com}`)"
@@ -182,7 +192,8 @@ services:
       - shared_net
       - homelab_swarm_net
     depends_on:
-      - storage-init
+      storage-init:
+        condition: service_healthy
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.uptime-kuma.rule=Host(`status.${ROOT_DOMAIN:-example.com}`) || Host(`uptimekuma.${ROOT_DOMAIN:-example.com}`)"
