@@ -89,6 +89,8 @@ services:
     environment:
       - PORT=8090
       - APP_URL=https://metrics.${ROOT_DOMAIN:-example.com}
+      - TRUSTED_AUTH_HEADER=Remote-Email
+      - USER_CREATION=true
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
