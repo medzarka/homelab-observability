@@ -94,8 +94,10 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
-      - shared_net
-      - homelab_swarm_net
+      shared_net:
+      homelab_swarm_net:
+        aliases:
+          - beszel
     depends_on:
       storage-init:
         condition: service_healthy
