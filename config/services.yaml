@@ -66,6 +66,12 @@
         description: "Autonomous Agent Cockpit, Gateway & Task Runner"
         siteMonitor: "https://hermes.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
+    - Workspace Files:
+        icon: filebrowser.png
+        href: "https://files-agents.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Hermes Workspace & Output File Manager (Upload/Download)"
+        siteMonitor: "https://files-agents.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
     - LiteLLM Gateway:
         icon: openai.png
         href: "https://litellm.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
