@@ -88,7 +88,7 @@
     - Knowledge Hub MCP:
         icon: si-fastapi
         href: "https://knowledge-mcp.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/health"
-        description: "Multi-Modal Ingestion & Semantic Knowledge Gateway"
+        description: "Unified AI MCP Hub (Qdrant Vector, Obsidian Vault, Neo4j, Mem0)"
         siteMonitor: "https://knowledge-mcp.{{HOMEPAGE_VAR_ROOT_DOMAIN}}/health"
 
     - Agent Sandbox MCP:
@@ -120,12 +120,6 @@
         href: "https://ignis.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
         description: "Browser-Based Native Obsidian Knowledge Vault"
         siteMonitor: "https://ignis.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-
-    - Obsidian Vault MCP:
-        icon: obsidian.png
-        href: "https://ignis.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
-        description: "Swarm MCP Bridge for Hermes Note Ingestion & Retrieval"
-        siteMonitor: "http://obsidian-mcp:3000"
 
 - AI Compute & Scraping Nodes (zap-srv):
     - SearXNG Search:
