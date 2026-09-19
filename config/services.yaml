@@ -115,6 +115,18 @@
         description: "Entity Knowledge Graph for Structural GraphRAG"
         siteMonitor: "https://neo4j.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
+    - Ignis (Obsidian Web):
+        icon: obsidian.png
+        href: "https://ignis.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Browser-Based Native Obsidian Knowledge Vault"
+        siteMonitor: "https://ignis.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
+    - Obsidian Vault MCP:
+        icon: obsidian.png
+        href: "https://ignis.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Swarm MCP Bridge for Hermes Note Ingestion & Retrieval"
+        siteMonitor: "http://obsidian-mcp:3000"
+
 - AI Compute & Scraping Nodes (zap-srv):
     - SearXNG Search:
         icon: searxng.png
