@@ -47,7 +47,6 @@ services:
       - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA/var/observability}/homepage/logs:/app/config/logs
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
     environment:
       - TZ=${TZ:-UTC}
       - ROOT_DOMAIN=${ROOT_DOMAIN:-example.com}
@@ -90,7 +89,6 @@ services:
     volumes:
       - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA/var/observability}/beszel:/beszel_data
       - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
     environment:
       - PORT=8090
       - APP_URL=https://metrics.${ROOT_DOMAIN:-example.com}
@@ -135,7 +133,6 @@ services:
       - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA/var/observability}/beszel-agent:/var/lib/beszel-agent
       - /:/extra-filesystems/root:ro
       - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
     environment:
       - LISTEN=45876
       - PORT=45876
@@ -161,7 +158,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
     environment:
       - DOZZLE_HOSTNAME=master-node
       - DOZZLE_REMOTE_AGENT=${DOZZLE_REMOTE_AGENT:-}
@@ -202,7 +198,6 @@ services:
     volumes:
       - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA/var/observability}/uptime-kuma:/app/data
       - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
     networks:
       - shared_net
       - homelab_swarm_net
