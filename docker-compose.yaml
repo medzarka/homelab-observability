@@ -237,6 +237,13 @@ services:
       - /etc/localtime:/etc/localtime:ro
     environment:
       - PORT=8080
+      - OIDC_CLIENT_ID=termix
+      - OIDC_CLIENT_SECRET=termix-secret-1234
+      - OIDC_ISSUER_URL=https://auth.bluewave.work
+      - OIDC_AUTHORIZATION_URL=https://auth.bluewave.work/api/oidc/authorization
+      - OIDC_TOKEN_URL=https://auth.bluewave.work/api/oidc/token
+      - OIDC_USERINFO_URL=https://auth.bluewave.work/api/oidc/userinfo
+      - OIDC_SCOPES=openid email profile groups
     networks:
       - shared_net
       - homelab_swarm_net
