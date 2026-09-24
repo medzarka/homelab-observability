@@ -15,7 +15,7 @@ services:
     command:
       - |
         echo ">>> [Storage Init] Setting up directories and permissions..."
-        mkdir -p /data/beszel /data/beszel-agent /data/uptime-kuma /data/homepage/logs
+        mkdir -p /data/beszel /data/beszel-agent /data/uptime-kuma /data/homepage/logs /data/termix
         chmod -R 775 /data
         chown -R ${PUID:-1000}:${PGID:-1000} /data
         # Remove 0-byte key if created previously so Beszel can generate a valid keypair
@@ -219,6 +219,54 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ========================================================
+  # TERMIX (Web-based Server & Docker Management Dashboard)
+  # ========================================================
+  termix:
+    image: ghcr.io/lukegus/termix:latest
+    container_name: termix
+    restart: unless-stopped
+    volumes:
+      - ${DATA_DIR:-/home/${SYSTEM_USER:-mgrsys}/DATA/var/observability}/termix:/app/data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - PORT=8080
+    networks:
+      - shared_net
+      - homelab_swarm_net
+    depends_on:
+      storage-init:
+        condition: service_healthy
+      guacd:
+        condition: service_started
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.termix.rule=Host(`termix.${ROOT_DOMAIN:-example.com}`)"
+      - "traefik.http.routers.termix.entrypoints=websecure"
+      - "traefik.http.routers.termix.tls=true"
+      - "traefik.http.routers.termix.tls.certresolver=cloudflare"
+      - "traefik.http.routers.termix.middlewares=authelia-sso@file,app-fail2ban@file,security-headers@file,compression@file"
+      - "traefik.http.services.termix.loadbalancer.server.port=8080"
+      - "traefik.docker.network=${SWARM_NETWORK:-homelab_swarm_net}"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  guacd:
+    image: guacamole/guacd:1.6.0
+    container_name: guacd
+    restart: unless-stopped
+    networks:
+      - shared_net
+      - homelab_swarm_net
     logging:
       driver: "json-file"
       options:

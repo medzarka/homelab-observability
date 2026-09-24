@@ -29,6 +29,12 @@
         description: "Lightweight LDAP User & Group Directory"
         siteMonitor: "https://lldap.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
 
+    - Termix:
+        icon: si-docker
+        href: "https://termix.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+        description: "Web-Based SSH & Server Management Console"
+        siteMonitor: "https://termix.{{HOMEPAGE_VAR_ROOT_DOMAIN}}"
+
     - Tailscale Mesh:
         icon: tailscale.png
         href: "https://login.tailscale.com/admin/machines"
