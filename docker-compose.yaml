@@ -244,6 +244,7 @@ services:
       - OIDC_TOKEN_URL=https://auth.bluewave.work/api/oidc/token
       - OIDC_USERINFO_URL=https://auth.bluewave.work/api/oidc/userinfo
       - OIDC_SCOPES=openid email profile groups
+      - OIDC_ALLOW_REGISTRATION=true
     networks:
       - shared_net
       - homelab_swarm_net
